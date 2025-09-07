@@ -1,0 +1,388 @@
+<!--
+File: index.html
+Project: Aitea-Building
+File Created: Sunday, 7th September 2025 3:36:16 am
+Author: Daniel Rodríguez Cabrera (daniel.rodriguez@aerin.es)
+Version: 2.0.0
+-----
+Last Modified: Sunday, 7th September 2025 4:04:15 am
+Modified By: Daniel Rodríguez Cabrera
+-----
+Copyright (c) 2023 - 2025 Aerin Sistemas S. L. copying, distribution or modification not authorised in writing is prohibited.
+-->
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proyecto L-30 · Misión León</title>
+    <meta name="theme-color" content="#0b0d10" />
+    <style>
+      :root {
+        --bg: #0b0d10;
+        --panel: #12161b;
+        --text: #e6edf3;
+        --muted: #9aa4b2;
+        --accent: #80d0ff;
+        --ok: #7ae582;
+        --bad: #ef476f;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: ui-monospace, Consolas, monospace;
+      }
+      .wrap {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 24px;
+      }
+      .card {
+        background: var(--panel);
+        border: 1px solid #1e2530;
+        border-radius: 14px;
+        padding: 22px;
+        margin: 14px 0;
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+      }
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(22px, 3vw, 32px);
+      }
+      h2 {
+        margin: 0 0 10px;
+        color: var(--accent);
+        font-size: 18px;
+      }
+      p {
+        line-height: 1.6;
+        color: var(--muted);
+      }
+      .btn {
+        appearance: none;
+        border: 1px solid #2a3240;
+        background: #0f141a;
+        color: var(--text);
+        padding: 10px 14px;
+        border-radius: 10px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn:active {
+        transform: translateY(1px);
+      }
+      .btn.ok {
+        border-color: #2b6142;
+        background: #0f1a14;
+        color: var(--ok);
+      }
+      .btn.bad {
+        border-color: #613142;
+        background: #1a0f14;
+        color: var(--bad);
+      }
+      .options {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        margin: 10px 0;
+      }
+      .hidden {
+        display: none !important;
+      }
+      .console {
+        background: #0a0c0f;
+        border: 1px solid #1b2330;
+        border-radius: 12px;
+        padding: 14px;
+        min-height: 130px;
+        overflow: auto;
+        font-size: 14px;
+        color: rgb(0, 255, 0);
+      }
+      .blink {
+        animation: blink 1s step-end infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+      .tag {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 999px;
+        border: 1px solid #2a3240;
+        background: #0f141a;
+        color: var(--muted);
+        font-size: 12px;
+      }
+      .center {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        align-items: center;
+      }
+      .big {
+        font-size: 18px;
+      }
+      .footer {
+        margin-top: 20px;
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .shake {
+        animation: shake 0.25s linear 1;
+      }
+      @keyframes shake {
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-4px);
+        }
+        75% {
+          transform: translateX(4px);
+        }
+      }
+      img {
+        max-width: 100%;
+        border-radius: 12px;
+        margin-top: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="card">
+        <h1>
+          Proyecto L-30 · <span class="tag">Misión resacón máximo</span>
+          <span class="blink">_</span>
+        </h1>
+        <p>
+          Bienvenido, <strong>Christian</strong>. Completa este quiz secreto.
+          <em>Si fallas una, vuelves al principio</em> 😈.
+        </p>
+        <div class="console" id="console" aria-live="polite"></div>
+      </div>
+
+      <div class="card" id="quizCard">
+        <h2>Verificación</h2>
+        <div id="qContainer"></div>
+        <div class="center">
+          <button id="nextBtn" class="btn">Siguiente</button>
+          <span id="progress" class="tag">Progreso: 0%</span>
+        </div>
+      </div>
+
+      <div class="card hidden" id="successCard">
+        <h2>¡Acceso concedido! 🎉</h2>
+        <p class="big">
+          Christian, feliz 30. Hemos pasado años increíbles juntos, y espero que
+          vengan muchísimos más: proyectos, fiestas, locuras y sobre todo
+          amistad. 💙
+        </p>
+        <p>
+          Esta vez quiero haceros un regalo a los tres
+          <strong
+            >he pillado un AirBnB para que nos vayamos juntos de fin de semana a
+            León</strong
+          >.
+        </p>
+        <p>
+          <strong>Operación:</strong> Fin de semana en
+          <span class="tag">León</span>. Solo falta fijar la fecha y nos vamos
+          allí. De locura y a desfasar. 🚀
+        </p>
+        <img src="cumple-criki-30.png" alt="Cumple Criki 30" />
+        <div class="center">
+          <button id="playBtn" class="btn ok">
+            ▶ Reproducir: Mandanga Style
+          </button>
+          <button id="replayBtn" class="btn">↺ Repetir confetti</button>
+        </div>
+        <audio id="mandanga" preload="auto" src="Mandanga-Style.mp3"></audio>
+      </div>
+
+      <div class="footer">
+        <span id="year"></span> · Proyecto L-30 · Hecho con cariño y dos cafés
+        ☕ a las 3am por
+        <a
+          href="https://github.com/daniel8rc"
+          target="_blank"
+          rel="noopener"
+          style="color: var(--accent); text-decoration: none"
+          >daniel8rc</a
+        >
+      </div>
+    </div>
+
+    <script>
+      // ===== CONFIG =====
+      const QUIZ = [
+        {
+          q: "¿Quién fue 'Yaya' en nuestras historias?",
+          options: [
+            'Una abuela random',
+            'El alter ego de Christian',
+            'El Yaya, mítico relaciones que nos colaba en todas las discotecas y ahora organiza tours más… calientes 🍑🔥',
+          ],
+          correct: 2,
+        },
+        {
+          q: '¿Dónde empezaban muchas de nuestras noches legendarias?',
+          options: ['Malasaña', 'Huertas', 'Chueca'],
+          correct: 1,
+        },
+        {
+          q: '¿Qué objeto simbólico siempre aparece en nuestras anécdotas?',
+          options: ['Hachas', 'Pesas', 'Botellas de agua'],
+          correct: 0,
+        },
+        {
+          q: '¿Qué dulce es clave en nuestros recuerdos?',
+          options: ['Donuts', 'Churros', 'Browni'],
+          correct: 2,
+        },
+        {
+          q: '¿Destino final (pista: Capital del Viejo Reino)?',
+          options: ['Soria', 'León', 'Zaragoza'],
+          correct: 1,
+        },
+      ];
+      // ==================
+
+      const $ = (s) => document.querySelector(s);
+      const $$ = (s) => Array.from(document.querySelectorAll(s));
+      const log = (m) => {
+        const c = $('#console');
+        c.innerHTML += m + '<br>';
+        c.scrollTop = c.scrollHeight;
+      };
+
+      const state = { i: 0, selected: null };
+      const qContainer = $('#qContainer');
+      const nextBtn = $('#nextBtn');
+      const progress = $('#progress');
+      const quizCard = $('#quizCard');
+      const successCard = $('#successCard');
+      const audio = $('#mandanga');
+      const playBtn = $('#playBtn');
+      const replayBtn = $('#replayBtn');
+
+      function renderQuestion() {
+        const { i } = state;
+        const item = QUIZ[i];
+        const pct = Math.round((i / QUIZ.length) * 100);
+        progress.textContent = 'Progreso: ' + pct + '%';
+        qContainer.innerHTML = `
+      <p class="big"><strong>Pregunta ${i + 1}:</strong> ${item.q}</p>
+      <div class="options">
+        ${item.options
+          .map(
+            (opt, idx) =>
+              `<button class="btn opt" data-idx="${idx}">${opt}</button>`
+          )
+          .join('')}
+      </div>
+    `;
+        state.selected = null;
+        $$('.opt').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            $$('.opt').forEach((b) => b.classList.remove('ok', 'bad'));
+            state.selected = Number(btn.dataset.idx);
+            btn.classList.add('ok');
+          });
+        });
+      }
+
+      function resetAll() {
+        state.i = 0;
+        state.selected = null;
+        quizCard.classList.add('shake');
+        setTimeout(() => quizCard.classList.remove('shake'), 250);
+        renderQuestion();
+        log('Respuesta incorrecta → Reiniciando desde la Pregunta 1.');
+      }
+
+      nextBtn.addEventListener('click', () => {
+        const item = QUIZ[state.i];
+        if (state.selected == null) {
+          quizCard.classList.add('shake');
+          setTimeout(() => quizCard.classList.remove('shake'), 250);
+          return;
+        }
+        const correct = state.selected === item.correct;
+        if (!correct) {
+          resetAll();
+          return;
+        }
+        log(`Pregunta ${state.i + 1}: OK`);
+        state.i++;
+        if (state.i < QUIZ.length) {
+          renderQuestion();
+        } else {
+          progress.textContent = 'Progreso: 100%';
+          quizCard.classList.add('hidden');
+          successCard.classList.remove('hidden');
+          confetti();
+          setInterval(confetti, 2000);
+          try {
+            audio.play().catch(() => {});
+          } catch (e) {}
+          log('Verificación completada. Bienvenido a León.');
+        }
+      });
+
+      playBtn.addEventListener('click', () => {
+        try {
+          audio.currentTime = 0;
+          audio.play();
+        } catch (e) {}
+      });
+      replayBtn.addEventListener('click', confetti);
+
+      function confetti() {
+        const N = 100;
+        for (let i = 0; i < N; i++) {
+          const s = document.createElement('span');
+          s.style.position = 'fixed';
+          s.style.top = '-10px';
+          s.style.left = Math.random() * 100 + '%';
+          s.style.width = s.style.height = 4 + Math.random() * 6 + 'px';
+          s.style.background = 'hsl(' + Math.random() * 360 + ' 90% 60%)';
+          s.style.borderRadius = '2px';
+          s.style.pointerEvents = 'none';
+          s.style.zIndex = 9999;
+          document.body.appendChild(s);
+          const duration = 2200 + Math.random() * 2200;
+          const x = Math.random() * 200 - 100 + 'px';
+          s.animate(
+            [
+              { transform: 'translateY(0) translateX(0)', opacity: 1 },
+              {
+                transform: 'translateY(100vh) translateX(' + x + ')',
+                opacity: 0.9,
+              },
+            ],
+            { duration, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'forwards' }
+          );
+          setTimeout(() => s.remove(), duration + 200);
+        }
+      }
+
+      (function init() {
+        $('#year').textContent = new Date().getFullYear();
+        log('Inicializando protocolo L-30...');
+        log('Cargando agentes: [Daniel] [Iván] [Álex] [Christian]');
+        log('Regla: si fallas, vuelves a empezar.');
+        renderQuestion();
+      })();
+    </script>
+  </body>
+</html>
